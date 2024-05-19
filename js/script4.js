@@ -79,7 +79,7 @@ const suma = function (a, b) { return a + b };
 const resta = function(a,b){return a - b};
 const algo = function () {return console.log("Algo")};
 
-// console.log(suma(3,4));
+// console.log(suma(3,4));  
 // console.log(resta(10,9));
 // algo();
 
