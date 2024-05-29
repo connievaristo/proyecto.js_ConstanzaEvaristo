@@ -126,7 +126,16 @@ const chucho = new Empleado("Chucho",3,"Prince");
 chucho.promocionar("King");
 console.log(chucho.cargo);
 
+class Estudiante2{
+    constructor(nombre,edad,curso){
+        this.nombre = nombre;
+        this.edad = edad;
+        this.curso = curso;
+    }
+};
 
+const conito = new Estudiante2("Conito",25,"Mañana");
+console.log(conito);
 
 
 
