@@ -38,6 +38,7 @@ arrayMixto.push("Al final"); //agrego al final
 console.log(arrayMixto);
 arrayMixto.unshift("Al principio"); //agrego al principio
 console.log(arrayMixto);
+//Eliminar objetos de un Array
 console.log(arrayMixto.pop()); //elimina y devuelve el último elemento del array
 console.log(arrayMixto);
 arrayMixto.shift(); //elimina primer elemento. NO RECOMENDADO
