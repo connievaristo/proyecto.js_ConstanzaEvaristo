@@ -1,4 +1,6 @@
-const cuerpo = document.body; //confirmar
+
+
+const cuerpo = document.body;
 
 const tituloH1 = document.getElementById('titulo');
 
@@ -90,7 +92,7 @@ const productos = [{
     id: 1,
     nombre: "Agua",
     precio: 700
-},
+}, 
 {
     id: 2,
     nombre: "Yerba",
