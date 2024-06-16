@@ -26,5 +26,6 @@ miFormulario.addEventListener('submit', (e) => {
     textContact.innerHTML = `El nombre ingresado es ${nombreForm.value}. La edad ingresada es ${edadForm.value}`;
 });
 
+//El target trabaja con los nodos y toma a los hijos.
 
 

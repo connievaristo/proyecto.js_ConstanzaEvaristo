@@ -75,3 +75,4 @@ inicioH1.addEventListener('mouseover',() =>{ //se pone azul cuando te parás y h
 inicioH1.addEventListener('mouseout', () => { //vuelve a negro cuando salís y hacés click
     inicioH1.style.color = 'black';
 });
+
