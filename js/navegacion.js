@@ -36,5 +36,5 @@ for (const link of links) {
 cabecera.style.backgroundColor = '#c2c2c2';
 
 
-footer[0].appendChild(parrafoFooter);
+footer[0].appendChild(parrafoFooter); //lo agregás como hijo del PRIMER elemento del footer [0]
 parrafoFooter.innerHTML = 'CoderHouse - ' + TIME + ' | Comisión #57705';
