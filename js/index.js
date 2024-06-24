@@ -1,78 +1,49 @@
-//Las variables que ya están declaradas en navegación, las reconoce (tiene que estar antes en el HTML porque es en casacada)
+const galleryContainer = document.querySelector('.slide');
+const prev = document.querySelector('.control.icon-prev');
+const next = document.querySelector('.control.icon-next');
 
-const mainBody = document.querySelector('#main'); //agarré el id main, como es el getElementbyId, como es querySelector va con #
-const boton = document.createElement('button');
-boton.textContent = 'Click'; //que diga click
-boton.type = 'button';
-mainBody.appendChild(boton);
-boton.style.backgroundColor='yellow'; //Estilos con DOM
-boton.style.padding='1rem'; 
-boton.style.width='6rem';
-boton.style.margin='2rem';
-boton.style.fontSize='1.2rem';
-//Hasta acá: DOM
+const imagenes = ['001', '002', '003'];
+let currentIndex = 0;
 
-//Eventos
+// Función para generar los elementos de la galería
+function createGallery() {
+    imagenes.forEach((img, index) => {
+        const li = document.createElement('li');
+        const image = document.createElement('img');
+        image.src = `img/${img}.JPG`;
+        image.alt = `img ${index + 1}`;
+        li.appendChild(image);
+        if (index === 0) {
+            li.classList.add('active');
+        }
+        galleryContainer.appendChild(li);
+    });
+}
 
-//1. .addEventListener('evento que quiero generar/capturar',funcionAsignada
-//Quiero que me cambie el color cuando aprieto el botón
+// Función para mostrar la imagen en el índice especificado
+function showImage(index) {
+    const galleryItems = document.querySelectorAll('.slide li');
+    galleryItems.forEach((li, i) => {
+        li.classList.toggle('active', i === index);
+    });
+}
 
-// function respuestaClick(){ 
-//     boton.style.backgroundColor = 'blue';
-//     boton.style.color = 'white';
-// }
+// Función para mostrar la siguiente imagen
+function showNextImage() {
+    currentIndex = (currentIndex + 1) % imagenes.length;
+    showImage(currentIndex);
+}
 
-//.addEventListener con función flecha declarada dentro
-// boton.addEventListener('click', () => {
-//     // boton.style.backgroundColor='red';
-//     // boton.style.color='white';
-// })
+// Función para mostrar la imagen anterior
+function showPrevImage() {
+    currentIndex = (currentIndex - 1 + imagenes.length) % imagenes.length;
+    showImage(currentIndex);
+}
 
-//2. onclick quiere que le pases una función
-boton.onclick = () => {
-    alert("Botón apretado con onclick!")
-};
+// Añadir eventos a los botones
+next.addEventListener('click', showNextImage);
+prev.addEventListener('click', showPrevImage);
 
-//3. Sintaxis en el HTML (buscá el input)
-
-//Más ejemplos:
-boton.onclick = () => {
-    cuerpo.classList.add('black'); //Mira en la consola el HTML para ver si aparece la clase
-};
-
-boton.addEventListener('mouseover',() => {
-    boton.style.color = 'blue';
-    boton.style.backgroundColor = 'yellow'
-});
-
-boton.addEventListener('mouseout', () => {
-    boton.style.color = 'yellow';
-    boton.style.backgroundColor = 'blue';
-});
-
-//Evento change
-let input1 = document.getElementById('nombre');
-let input2 = document.getElementById('edad');
-
-input1.onchange = () => {console.log(input1.value)}; //Traigo el valor ingresado en el input
-input2.onchange = () => {console.log(input2.value)};
-
-//Elemento input
-input1.addEventListener('input', () => {
-    console.log(input1.value)
-});
-
-//Evento submit en contact.js
-
-//Eventos del mouse
-let inicioH1 = document.getElementById('inicioH1');
-console.log(inicioH1.innerHTML); //Inicio
-
-inicioH1.addEventListener('mouseover',() =>{ //se pone azul cuando te parás y hacés click
-    inicioH1.style.color = 'blue';
-});
-
-inicioH1.addEventListener('mouseout', () => { //vuelve a negro cuando salís y hacés click
-    inicioH1.style.color = 'black';
-});
-
+// Inicializar la galería
+createGallery();
+showImage(currentIndex);

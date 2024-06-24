@@ -1,152 +1,85 @@
-/* Clase 11:
-//localStorage
-localStorage.setItem("string", "Hola Connie");
-localStorage.setItem("Numbers", 1230);
-localStorage.setItem("Booleano", true);
-localStorage.setItem("Array", [1, 2, 3, 4]);
-
-//Recuperar valor de la clave
-let stringLocal = localStorage.getItem("string");
-console.log(stringLocal); //Hola Connie
-
-//sessionStorage
-sessionStorage.setItem("stringS", "Bai");
-sessionStorage.setItem("NumberS", 1808);
-sessionStorage.setItem("Boolean", false);
-sessionStorage.setItem("ArrayS", [5, 6, 7, 8]);
-
-//ver valor
-console.log(sessionStorage.getItem("ArrayS")); //5,6,7,8
-// console.log(typeof "Arrays"); //Muestra tipo de dato. Es string, siempre String para esto
-
-//Eliminar elementos del Storage
-localStorage.removeItem("Array");
-
-for (let i = 0; i < localStorage.length; i++) { //con el lenght recorrés
-    let clave = localStorage.key(i); //cuando vale 1 toma string, cuando vale 2 numbers, 3 booleano y 4 array
-    console.log("Clave: " + clave + " | Valor: " + localStorage.getItem(clave));
-}
-/*
-Clave: Booleano | Valor: true
-Clave: string | Valor: Hola Connie
-Clave: Numbers | Valor: 1230
-
-//JSON
-const producto = {
-    id: 1,
-    nombre: "Azúcar",
-    precio: 1000
-};
-
-//localStorage.setItem("producto",producto); //pasé el objeto como value. te lo muestra así: [object Object]
-
-//Transformo a JSON (txt plano)
-const productoJSON = JSON.stringify(producto);
-console.log(producto);
-console.log(productoJSON); //{"id":1,"nombre":"Azúcar","precio":1000}
-
-localStorage.setItem("Producto", productoJSON);
-
-const productoOBJECT = JSON.parse(productoJSON);
-console.log(productoOBJECT); //vuelve a ser Objeto
-console.log(productoOBJECT.id);
-
-const productoRecoveredFromLocal = JSON.parse(localStorage.getItem("Producto")); //recupero de una
-console.log(productoRecoveredFromLocal);
-
-*/
-
-/*
-const productos = [
-    {
-        id: 1,
-        nombre: "Azúcar",
-        precio: 1000
-    },
-    {
-        id: 2,
-        nombre: "Yerba",
-        precio: 1600
-    },
-    {
-        id: 3,
-        nombre: "Dulce de leche",
-        precio: 2800
-    }
-]
-
-const guardarEnLocalStorage = (key, value ) => {localStorage.setItem(key,value)};
-
-//Almacenamos producto por producto
-// for (const producto of productos){
-//     guardarEnLocalStorage(producto.id,JSON.stringify(producto)) //key: id - value: el objeto completo
-// };
-
-guardarEnLocalStorage("productos",JSON.stringify(productos));
-
-console.log(JSON.parse(localStorage.getItem("productos"))); //Recupero
-*/
-localStorage.clear();
-
-//Actividad en clase: Crear CARRITO DE COMPRAS completo
 
 const products = [
-    { id: 1, nombre: "Azúcar", precio: 1000 },
-    { id: 2, nombre: "Yerba", precio: 1700 },
-    { id: 3, nombre: "Dulce de Leche", precio: 2800 },
-    { id: 4, nombre: "Manteca", precio: 980 },
-    { id: 5, nombre: "Azúcar impalpable", precio: 1200 },
-    { id: 1, nombre: "Café", precio: 4000 },
-];
+    {id: 1, name: "Azucar", price: 1080},
+    {id: 2, name: "Yerba", price: 1700},
+    {id: 3, name: "Dulce de Leche", price: 2800},
+    {id: 4, name: "Manteca", price: 980},
+    {id: 5, name: "Azucar Impalpable", price: 1280},
+    {id: 6, name: "Café", price: 4080},
+]
 
-let cart = localCartFromLocalStorage();
-
-function addToCart(productId, cantidad) {
-    const product = products.find(p => p.id === productId) //le digo que me recupere todos los Id siempre y cuando coincida con el que paso por parámetro
+let cart = loadCartFromLocalStorage();
+const errorCarritoDiv = document.getElementById('error_carrito');
+errorCarritoDiv.style.color = 'red';
+function mandarMjeDeError(productId){
+    errorCarritoDiv.innerHTML = `<p>Producto con ID: ${productId} no encontrado</p>`;    
+}
+function addToCart(productId, quantity) {
+    const product = products.find(p => p.id === productId);
     if (!product) {
-        console.error("El producto no fue encontrado");
-        return; //return para que salga de la función
+        mandarMjeDeError(productId)
+        return;
     }
 
-    const cartItem = cart.find(item => item.id = productId);
+    const cartItem = cart.find(item => item.id === productId);
 
-    if (cartItem) { //si está el item
-        cartItem.cantidad += cantidad; //al item que ya existe, le incremento la cant que paso x parametro
-        cartItem.subTotal = cartItem.cantidad * cartItem.precio;
-    } else { //Si el producto no existe, lo creo y sumo al carrito:
+    if (cartItem) {
+        cartItem.quantity += quantity;
+        cartItem.totalPrice = cartItem.quantity * product.price;
+    } else {
         cart.push({
             id: product.id,
-            nombre: product.nombre,
-            precio: product.precio,
-            cantidad: cantidad,
-            subTotal: cantidad * product.precio
-        })
+            name: product.name,
+            price: product.price,
+            quantity: quantity,
+            totalPrice: quantity * product.price
+        });
     }
 
     saveCartToLocalStorage();
     renderCart();
-};
+}
 
-function renderProductos() {
-    const productList = document.getElementById('productList');
-    productList.innerHTML = ''; //lo limpio?
+function renderProducts() {
+    const productList = document.getElementById('product-list');
+    productList.innerHTML = ''; // Limpiar la lista de productos
     products.forEach(product => {
         const productDiv = document.createElement('div');
         productDiv.innerHTML = `
-        <p>${product.nombre} - $${product.precio}</p>
-        <button onclick="addToCart(${product.id},1)">Agregar al Carrito</button>
+            <p>${product.name} - $${product.price}</p>
+            <button onclick="addToCart(${product.id}, 1)" class="button_grey">Agregar al Carrito</button>
         `;
         productList.appendChild(productDiv);
-    })
-};
-
-function renderCart(){
-    const cartDiv = document.getElementById('div');
-    cart.forEach(item => {
-        const cartItemDiv = document.createElement('div');
-        cartItemDiv = `
-        <p></p>`
-    })
+    });
 }
 
-//DOMCoantedLoad: espera a q se cargue la página?
+function renderCart() {
+    const cartDiv = document.getElementById('cart');
+    cartDiv.innerHTML = '';
+    cart.forEach(item => {
+        const cartItemDiv = document.createElement('div');
+        cartItemDiv.innerHTML = `
+            <p>ID: ${item.id}, Nombre: ${item.name}, Cantidad: ${item.quantity}, Precio Total: $${item.totalPrice}</p>
+        `;
+        cartDiv.appendChild(cartItemDiv);
+    });
+}
+
+function saveCartToLocalStorage() {
+    localStorage.setItem('cart', JSON.stringify(cart));
+}
+
+function loadCartFromLocalStorage() {
+    const cartData = localStorage.getItem('cart');
+    return cartData ? JSON.parse(cartData) : [];
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    renderProducts();
+    renderCart();
+});
+
+function testError() {
+    addToCart(999, 1); // El Producto con id 999 no existe, por eso lo testeo
+}
+testError();

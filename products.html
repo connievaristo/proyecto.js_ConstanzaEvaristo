@@ -1,29 +1,36 @@
-<html lang="es-AR"> <!--Así sabe q leng maneja-->
+
+<!DOCTYPE html>
+<html lang="es-AR">
 
 <head>
-    <meta charset="UTF-8"> <!--incluye ñ, acentos, etc-->
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coderhouse</title>
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Javascript | Comisión #57705</title>
 </head>
 
 <body>
     <header id="header"></header>
+    <button id="toggle-button">Cambiar a modo oscuro</button>
     <main>
         <h1>Productos</h1>
-        <div id="productList">
-            <!--acá se verá la lista de productos-->
+        <div id="product-list">
+            <!-- Los productos se van a listar acá -->
         </div>
-        <h3>Carrito de Compras</h3>
+        <div class="line"></div>
+        <h3 class="cart_title">Carrito de Compras</h3>
         <div id="cart">
-            <!--acá se verá el carrito-->
+            <!-- El carrito se va a mostrar acá -->
         </div>
+        <div id="error_carrito"></div>
     </main>
-
     <footer></footer>
-    <!--Acá van los scripts-->
-    <script src="/js/navegacion.js"></script>
+    <!-- Aca pongo los Script de JS -->
+    <script src="js/global.js"></script>
+    <script src="js/navegacion.js"></script>
     <script src="js/products.js"></script>
+    <!-- Scripts de JS  -->
 </body>
 
 </html>
