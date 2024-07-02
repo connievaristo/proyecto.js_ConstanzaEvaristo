@@ -234,3 +234,9 @@ background-color: black !important;
     background-color: blue !important;
     height: 2px !important;
 }
+
+#listado {
+    display: flex;
+    flex-direction: column;
+    margin: 1rem;
+}
