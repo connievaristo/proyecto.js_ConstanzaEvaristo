@@ -1,88 +1,61 @@
-//  
-const lista = document.getElementById('listado');
+console.log("Función sincrónica 1"); //aparece primero esto
+
+//aparece tercera esta:
+setTimeout(() => { //tarda 5segs en aparecer
+    console.log("Función asincrónica 1")}, //función callback
+    5000); //tiempo en milisegundos. aunque le pongas 0, apareceria tercero
+
+console.log("Función sincrónica 2"); //aparece segundo esto
+
+//Ej. que vuelva a modo claro dsp de cierto tiempo -> ver navegacion.js
+
+//setInterval: pones un intervalo
+// setInterval(() => {
+//     console.log("Función asincrónica 2")
+// }, 100);
+
+//clearInterval: para frenar el setInterval
 
 
-fetch("https://jsonplaceholder.typicode.com/posts/") //traigo info por API a mi pag
-    .then((response) => response.json())
-    .then(data => {
-        data.forEach(element => {
-            const li = document.createElement('li');
-            li.innerHTML = `
-        <h3>${element.id}</h3>
-        <h4>${element.title}</h4>
-        <p>${element.body}</p>
-        `
-            lista.appendChild(li);
+//clearTimeout: para frenarlo, para anular el setTimeOut
+console.log("Iniciar");
+
+const fin = setTimeout(() => {
+    console.log("Final")
+}, 2000);
+
+clearTimeout(fin); //no deja que se ejecute
+
+
+//Promesas
+const eventoAFuturo = (pasarNivel) => {
+    return new Promise ((resolve, reject) => {
+        pasarNivel ? resolve("RES fulfilled") : reject("RES rejected")
         });
-    });
-
-//Enviar información
-fetch("https://jsonplaceholder.typicode.com/posts/",
-    {
-        method: 'POST',
-        body: JSON.stringify({
-            title: "Nuevo objeto",
-            body: "Posteo de prueba",
-            userId: 1
-        }
-        ),
-        headers: {
-            'Content-type': 'application/json; charset=UTF-8' //SIEMPRE así el content-type, con app/json, el charset es opcional.
-        }
-    })
-    .then((response) => response.json())
-    .then((data) => console.log(data));
-;
-
-    fetch("https://jsonplaceholder.typicode.com/posts/",
-        {
-            method: 'PUT',
-            body: JSON.stringify({
-                title: "Nuevo objeto",
-                body: "Posteo de prueba",
-                userId: 1
-            }
-            ),
-            headers: {
-                'Content-type': 'application/json; charset=UTF-8' //SIEMPRE así el content-type, con app/json, el charset es opcional.
-            }
-        })
-        .then((response) => response.json())
-        .then((data) => console.log(data));
-
-fetch("https://jsonplaceholder.typicode.com/posts/",
-            {
-                method: 'DELETE',
-                headers: {
-                    'Content-type': 'application/json; charset=UTF-8' //SIEMPRE así el content-type, con app/json, el charset es opcional.
-                }
-            })
-            .then((response) => response.json())
-            .then((data) => console.log(data));
-;
-//Cuando das la ruta así es ruta absoluta
-
-//Rutas relativas
-const cards = document.getElementById("cards");
-
-const peticionA = async () => {
-    const respuestaA = await fetch('/productos.json');
-    const datos = await respuestaA.json();
-    const data = await datos;
-    for (item of data){
-        const card = document.createElement('div');
-        card.innerHTML = `
-        <div class="card" style="width: 18rem; height: 32rem">
-        <img class="card-img-top" src=${item.imagen} alt=${item.nombre}>
-        <div class="card-body">
-        <h5 class="card-title">${item.nombre}</h5>
-        <p class="card-text">Descripción: ${item.descripcion}</p>
-        <p class="card-text">Precio: ${item.precio}</p>
-        <p class="card-text">Stock: ${item.stock}</p>
-        <a href="#" class="btn btn-success">Comprar</a>
-        </div>
-        </div>
-        `
-        cards.appendChild(card);
     };
-};
+
+console.log(eventoAFuturo(true)); //Promise {<fulfilled>: 'Promesa fulfilled'}
+console.log(eventoAFuturo(false)); //Promise {<rejected>: 'Promesa rejected'}
+
+//then y catch
+eventoAFuturo(true)
+.then((respuesta) => {
+    console.log(respuesta, "pasó al nivel 2"); //si paso true, veo esto en console log: "RES fulfilled"
+})
+.catch((error) => {
+    console.error(error);
+})
+.finally(() => { //Se ejecuta siempre
+    console.warn("Chauuu true");
+})
+
+eventoAFuturo(false)
+.then((respuesta) => {
+    console.log(respuesta); 
+})
+.catch((error) => {
+    console.error(error);//si paso false, veo esto en console log: "RES rejected"
+})
+.finally(() => { //Se ejecuta siempre - Ojo para usarlo
+    console.warn("Chauuu false");
+})

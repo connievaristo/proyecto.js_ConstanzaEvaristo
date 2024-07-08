@@ -3,9 +3,11 @@ const boton = document.getElementById('boton');
 // boton.addEventListener('click', () => {
 //     alert("Me hicieron click");
 // }); //Bastante feo así
-/*
+
 //con Sweet Alert, mirá doc
-boton.addEventListener('click',() =>{
+boton.addEventListener('click',
+  
+  () =>{
     // Swal.fire("Me hicieron click!");
     Swal.fire({
         title: "Me hicieron click",
@@ -17,7 +19,7 @@ boton.addEventListener('click',() =>{
         imageAlt: "CoderHouse"
       });
 });
-*/
+
 
 // boton.addEventListener('click', () => {
 //     Swal.fire({

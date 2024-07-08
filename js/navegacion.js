@@ -31,7 +31,10 @@ document.addEventListener('DOMContentLoaded', function() {
     buttonToggle.addEventListener('click' , function() {
         cuerpo.classList.toggle('dark-mode');
         updateButtonText();
-    })
+        setTimeout(() => {
+            cuerpo.classList.remove('dark-mode') //hay que sacarle la clase dark mode - xq está config así -
+        }, 2000) //pasan 2 segs y vuelve a light mode
+    });
 
     function updateButtonText() {
         if(cuerpo.classList.contains('dark-mode')) {
