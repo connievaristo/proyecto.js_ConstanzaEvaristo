@@ -3,21 +3,21 @@ const boton = document.getElementById('boton');
 // boton.addEventListener('click', () => {
 //     alert("Me hicieron click");
 // }); //Bastante feo así
-/*
+
 //con Sweet Alert, mirá doc
-boton.addEventListener('click',() =>{
-    // Swal.fire("Me hicieron click!");
-    Swal.fire({
-        title: "Me hicieron click",
-        text: "Now what?",
-        icon: "info", //existen: success, info, warning, question
-        footer: '<a href="./index.html">Take me to Index</a>',
-        imageUrl: "./img/logo.png",
-        imageHeight: 200,
-        imageAlt: "CoderHouse"
-      });
-});
-*/
+// boton.addEventListener('click',() =>{
+//     Swal.fire("Me hicieron click!");
+//     Swal.fire({
+//         title: "Me hicieron click",
+//         text: "Now what?",
+//         icon: "info", //existen: success, info, warning, question
+//         footer: '<a href="./index.html">Take me to Index</a>',
+//         imageUrl: "./img/logo.png",
+//         imageHeight: 200,
+//         imageAlt: "CoderHouse"
+//       });
+// });
+
 
 // boton.addEventListener('click', () => {
 //     Swal.fire({
@@ -58,30 +58,30 @@ boton.addEventListener('click',() =>{
 //     }).showToast();
 // });
 
-// boton.addEventListener('click', () => {
-//     Toastify({
-//         text: "El usuario está en línea",
-//         className: "info",
-//         // destination: "https://github.com/apvarun/toastify-js", //Clickeás y te llva a otra página
-//         // newWindow: true,
-//         onClick: function () {
-//             Toastify({
-//                 text: "Hiciste otro click!",
-//                 duration: 3000
-//             }).showToast();
-//         },
-//         close: true,
-//         gravity: "bottom",
-//         position: "left",
-//         avatar: "./img/logo.png", //Aparece la fotito
-//         offset: { //para mover dónde aparece (en px)
-//             x: 150, 
-//             y: 150
-//           },
-//         style: {
-//             background: "linear-gradient(to right, #12000b, #96c93d)",
-//         }
-//     }).showToast();
-// });
+boton.addEventListener('click', () => {
+    Toastify({
+        text: "El usuario está en línea",
+        className: "info",
+        // destination: "https://github.com/apvarun/toastify-js", //Clickeás y te llva a otra página
+        // newWindow: true,
+        onClick: function () {
+            Toastify({
+                text: "Hiciste otro click!",
+                duration: 3000
+            }).showToast();
+        },
+        close: true,
+        gravity: "bottom",
+        position: "left",
+        avatar: "./img/logo.png", //Aparece la fotito
+        offset: { //para mover dónde aparece (en px)
+            x: 150, 
+            y: 150
+          },
+        style: {
+            background: "linear-gradient(to right, #12000b, #96c93d)",
+        }
+    }).showToast();
+});
 
 //AOS
